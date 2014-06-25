@@ -31,6 +31,12 @@ class: center, middle
 
 class: center, middle
 
+# Why Science? Why Math?
+
+---
+
+class: center, middle
+
 <img src="img/grumpy-cat-math.jpg" />
 
 ---
@@ -45,6 +51,7 @@ scientific problems.
 
 class: center, middle
 
+# Life Tip
 
 <img src="img/smbc-for-science-1.gif" width="450" />
 
@@ -52,9 +59,17 @@ class: center, middle
 
 class: center, middle
 
+# (Just Don't Do This)
+
 <img src="img/smbc-for-science-2.gif" width="450" />
 
 [Saturday Morning Breakfast Cereal (SMBC)](http://www.smbc-comics.com/?id=1202)
+
+---
+
+class: center, middle
+
+# But **Why?**
 
 ---
 
@@ -94,6 +109,7 @@ things we take for granted today would never exist.
 * Scientific Computing provides tools for analyzing the observable world around 
 us, to come to conclusions and make our lives easier for us.
 
+---
 
 # Scope of Discussion
 
@@ -103,6 +119,11 @@ us, to come to conclusions and make our lives easier for us.
   * SciKit
 2. Demo
 3. More Demo 
+
+---
+class: center, middle
+
+<img src="img/cat-science.jpg" width="450"/>
 
 ---
 
@@ -653,37 +674,10 @@ lst = range(1000000)
 arr = np.arange(1000000)
 arr + 1
 ```
-
-NumPy is **FAST**
-
 ---
 class: center, middle
 
-# ... So let's recap
-
----
-class: center, middle
-
-
-# NumPy Arrays
-
-```python
-arr = np.ndarray(...)
-```
-
-<img src="img/road-runner.png" width="450" />
-
----
-class: center, middle
-
-# Python Lists
-
-```python
-lst = [...]
-```
-
-<img src="img/coyote.jpg" height="400" />
-
+# ... So let's recap ...
 
 ---
 class: center, middle
@@ -707,7 +701,30 @@ lst = [...]
 ```
 
 <img src="img/coyote.jpg" height="400" />
+
+
+---
+class: center, middle
+
+
+# NumPy Arrays
+
+```python
+arr = np.ndarray(...)
 ```
+
+<img src="img/road-runner.png" width="450" />
+
+---
+class: center, middle
+
+# Python Lists
+
+```python
+lst = [...]
+```
+
+<img src="img/coyote.jpg" height="400" />
 
 ---
 
@@ -719,7 +736,7 @@ lst = [...]
 
 * OpenCV
 * Sci-kit
-
+* More: https://wiki.python.org/moin/NumericAndScientific
 
 
 ---
@@ -727,10 +744,9 @@ class: center, middle
 ![Nuff Said](http://img3.wikia.nocookie.net/__cb20080310035003/uncyclopedia/images/thumb/8/81/Nuff-said.gif/696px-Nuff-said.gif)
 ---
 
-
 class: center, middle
 # Let's Use NumPy
-
+  
 ---
 
 ## Initialize Empty Array
@@ -852,172 +868,201 @@ y = np.int_([1,2,4])
 
 class: center, middle
 
-<img src="img/opencv-logo.jpg" width="450" />
+<img src="img/numpy.png" />
+# Demo
+
+**Source:** https://github.com/spartanem/python-for-researchers/
 
 ---
 
-# OpenCV
+class: center, middle
 
-* OpenCV is a library of programming functions mainly aimed at real-time computer 
-vision, developed by Intel Russia research center in Nizhny Novgorod, and now 
-supported by Willow Garage and Itseez.
+<img src="img/matplotlib-logo.svg" />
 
-* Built originally with C, then revised in C++
+**NumPy is Cool but let's make it Cooler**
 
-* Officially supported interfaces in C++, Python and Java
-
-* Available on: 
-  - Windows
-  - Mac
-  - Linux
-  - iOS
-  - Android
 
 ---
 
-# OpenCV
+# What is Matplotlib?
 
-## Applications
+* matplotlib is a python 2D plotting library which produces publication quality 
+figures in a variety of hardcopy formats and interactive environments across 
+platforms. 
 
-* 2D and 3D feature toolkits
-* Egomotion estimation
-* **Facial recognition system**
-* Gesture recognition
-* Human–computer interaction (HCI)
-* Mobile robotics
-* Motion understanding
-* Object identification
-* Segmentation and Recognition
-* Stereopsis Stereo vision: depth perception from 2 cameras
-* Structure from motion (SFM)
-* Motion tracking
-* Augmented reality
+* matplotlib can be used in python scripts, the python and ipython shell web 
+application servers, and six graphical user interface toolkits.
 
 ---
 
-# OpenCV
+class: center, middle
 
-## Machine Learning Support
+# ... Let's see what we can do ...
 
-* Boosting (meta-algorithm)
-* Decision tree learning
-* Gradient boosting trees
-* Expectation-maximization algorithm
-* **k-nearest neighbor algorithm**
-* Naive Bayes classifier
-* Artificial neural networks
-* Random forest
-* Support vector machine (SVM)
+---
+
+# Simple Plot
+
+```python
+from pylab import *
+
+t = arange(0.0, 2.0, 0.01)
+s = sin(2*pi*t)
+plot(t, s)
+
+xlabel('time (s)')
+ylabel('voltage (mV)')
+title('About as simple as it gets, folks')
+grid(True)
+savefig("test.png")
+show()
+```
+
+---
+
+# Subplot
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+x1 = np.linspace(0.0, 5.0)
+x2 = np.linspace(0.0, 2.0)
+
+y1 = np.cos(2 * np.pi * x1) * np.exp(-x1)
+y2 = np.cos(2 * np.pi * x2)
+
+plt.subplot(2, 1, 1)
+plt.plot(x1, y1, 'yo-')
+plt.title('A tale of 2 subplots')
+plt.ylabel('Damped oscillation')
+
+plt.subplot(2, 1, 2)
+plt.plot(x2, y2, 'r.-')
+plt.xlabel('time (s)')
+plt.ylabel('Undamped')
+
+plt.show()
+
+```
+---
+
+# Pie Chart
+```python
+import matplotlib.pyplot as plt
+
+
+# The slices will be ordered and plotted counter-clockwise.
+labels = 'Frogs', 'Hogs', 'Dogs', 'Logs'
+sizes = [15, 30, 45, 10]
+colors = ['yellowgreen', 'gold', 'lightskyblue', 'lightcoral']
+explode = (0, 0.1, 0, 0) # only "explode" the 2nd slice (i.e. 'Hogs')
+
+plt.pie(sizes, explode=explode, labels=labels, colors=colors,
+        autopct='%1.1f%%', shadow=True, startangle=90)
+# Set aspect ratio to be equal so that pie is drawn as a circle.
+plt.axis('equal')
+plt.show()
+
+```
+---
+class: center, middle
+
+# Stock Data
+
+## Let's see a slightly more complicated, but interesting
+
+<img src="img/spy.png" width="450" />
+
+---
+
+# XKCD (http://xkcd.com/418/)
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+
+with plt.xkcd():
+    fig = plt.figure()
+    ax = fig.add_axes((0.1, 0.2, 0.8, 0.7))
+    ax.spines['right'].set_color('none')
+    ax.spines['top'].set_color('none')
+    plt.xticks([])
+    plt.yticks([])
+    ax.set_ylim([-30, 10])
+
+    data = np.ones(100)
+    data[70:] -= np.arange(30)
+
+    plt.annotate(
+        'THE DAY I REALIZED\nI COULD COOK BACON\nWHENEVER I WANTED',
+        xy=(70, 1), arrowprops=dict(arrowstyle='->'), xytext=(15, -10))
+
+    plt.plot(data)
+    plt.xlabel('time')
+    plt.ylabel('my overall health')
+    fig.text(0.5, 0.05,
+        '"Stove Ownership" from xkcd by Randall Monroe',
+        ha='center')
+plt.show()
+
+
+```
+---
+class: center, middle
+
+# Machine Learning
 
 <img src="img/machine-learning.png" width="256"/>
 
 ---
 
-# OpenCV
-
-## Facial Recognition
-
-OpenCV comes with built-in support for object detection for 2 algorithms
-
-* Haar Cascade
-* HOG (Histogram of Gradients) Descriptors
-
----
 class: center, middle
 
-# OpenCV
-## Haar Cascade
-<img src="img/haar-classifier.jpg" width="450"/>
+# What is Machine Learning
+
+## Different Meanings Depending on Who You Ask
+
+<img src="img/machine-learning.png" width="256"/>
+
 
 ---
+
+# Arthur Samuel (1969)
+Arthur Lee Samuel was an American pioneer in the field of computer gaming and 
+artificial intelligence.
+
+## A field of study that gives computers the ability to learn without being explicitly programmed. 
+
+---
+
+# Tom Mitchel (1998)
+Tom Michael Mitchell (born 9 August 1951) is an American computer scientist and 
+E. Fredkin University Professor at the Carnegie Mellon University (CMU). 
+He is currently the Chair of Machine Learning Department at CMU.
+
+
+## A well posed learning program: A computer program is said to learn from experience E, with respect to some tast T, and some performance measure P, if its performance on T, as measured by P improves with experience E.
+
+---
+
+# Types of Learning
+
+1. **Unsupervised Learning**
+  * K-Means Clustering
+2. **Supervised Learning**
+  * Facial Detection
+3. **Reinforcement Learning**
+4. **Recommender Systems**
+---
+
 class: center, middle
 
-# OpenCV
-
-## HOG  (Histogram of Gradients) Descriptors
-
-<img src="img/hog-descriptor.png" width="450"/>
+<img src="img/scikit-learn-logo.png" />
 
 ---
 
-class: center, middle
-
-# Facial Detection
-
-Let's create a Facial Detection Application with OpenCV
-
-<img src="img/face-detected.png" width="450" />
-
----
-
-## Haar Cascade
-```python 
-import cv2
-cam = cv2.VideoCapture(0)
-s, img = cam.read()
-face_cascade = cv2.CascadeClassifier('haar/haarcascade.xml')
-eye_cascade = cv2.CascadeClassifier('haar/haarcascade_eye.xml')
-cv2.namedWindow("Face Detection", cv2.CV_WINDOW_AUTOSIZE)
-
-while s:
-  cv2.imshow( winName,img )
-  s, img = cam.read()
-
-  ## detect face on image
-  gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-  faces = face_cascade.detectMultiScale(gray, 1.3, 5)
-  for (x,y,w,h) in faces:
-      cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),2)
-      roi_gray = gray[y:y+h, x:x+w]
-      roi_color = img[y:y+h, x:x+w]
-      eyes = eye_cascade.detectMultiScale(roi_gray)
-      for (ex,ey,ew,eh) in eyes:
-          cv2.rectangle(roi_color,(ex,ey),(ex+ew,ey+eh),(0,255,0),2)
-
-  # check for ESC key press, and stop when the user requests it 
-  key = cv2.waitKey(10)
-  if key == 27: 
-    cv2.destroyWindow(winName)
-    break
-
-```
-
----
-# HOG Descriptor
-## How it Works
-
-```python
-import matplotlib.pyplot as plt
-from skimage.feature import hog
-from skimage import data, color, exposure
-
-image = color.rgb2gray(data.lena())
-
-fd, hog_image = hog(image, orientations=8, pixels_per_cell=(16, 16),
-                    cells_per_block=(1, 1), visualise=True)
-
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(8, 4))
-
-ax1.axis('off')
-ax1.imshow(image, cmap=plt.cm.gray)
-ax1.set_title('Input image')
-
-# Rescale histogram for better display
-hog_image_rescaled = exposure.rescale_intensity(hog_image, in_range=(0, 0.02))
-ax2.axis('off')
-ax2.imshow(hog_image_rescaled, cmap=plt.cm.gray)
-ax2.set_title('Histogram of Oriented Gradients')
-plt.show()
-```
-
----
-# HOG Descriptor
-
-```python
-TODO: INSERT CODE
-```
-
----
 # K-Means Clustering
 
 K-means clustering is a method of vector quantization, originally from signal 
@@ -1122,9 +1167,190 @@ plt.axis("off")
 plt.imshow(bar)
 plt.show()
 ```
+---
+
+class: center, middle
+
+<img src="img/opencv-logo.jpg" width="450" />
+---
+
+# OpenCV
+
+* OpenCV is a library of programming functions mainly aimed at real-time computer 
+vision, developed by Intel Russia research center in Nizhny Novgorod, and now 
+supported by Willow Garage and Itseez.
+
+* Built originally with C, then revised in C++
+
+* Officially supported interfaces in C++, Python and Java
+
+* Available on: 
+  - Windows
+  - Mac
+  - Linux
+  - iOS
+  - Android
 
 ---
 
+# OpenCV
+
+## Applications
+
+* 2D and 3D feature toolkits
+* Egomotion estimation
+* Facial recognition system
+* Gesture recognition
+* Human–computer interaction (HCI)
+* Mobile robotics
+* Motion understanding
+* Object identification
+* Segmentation and Recognition
+* Stereopsis Stereo vision: depth perception from 2 cameras
+* Structure from motion (SFM)
+* Motion tracking
+* Augmented reality
+
+---
+
+# OpenCV
+
+## Machine Learning Support
+
+* Boosting (meta-algorithm)
+* Decision tree learning
+* Gradient boosting trees
+* Expectation-maximization algorithm
+* k-nearest neighbor algorithm
+* Naive Bayes classifier
+* Artificial neural networks
+* Random forest
+* Support vector machine (SVM)
+
+---
+
+# OpenCV
+
+## Facial Recognition
+
+OpenCV comes with built-in support for object detection for 2 algorithms
+
+* Haar Cascade
+* HOG (Histogram of Gradients) Descriptors
+
+---
+class: center, middle
+
+# OpenCV
+## Haar Cascade
+<img src="img/haar-classifier.jpg" width="450"/>
+
+---
+class: center, middle
+
+# OpenCV
+
+## HOG  (Histogram of Gradients) Descriptors
+
+<img src="img/hog-descriptor.png" width="450"/>
+
+---
+
+class: center, middle
+
+# Facial Detection
+
+Let's create a Facial Detection Application with OpenCV
+
+<img src="img/face-detected.png" width="450" />
+
+---
+
+## Haar Cascade
+```python 
+import cv2
+cam = cv2.VideoCapture(0)
+s, img = cam.read()
+face_cascade = cv2.CascadeClassifier('haar/haarcascade.xml')
+eye_cascade = cv2.CascadeClassifier('haar/haarcascade_eye.xml')
+cv2.namedWindow("Face Detection", cv2.CV_WINDOW_AUTOSIZE)
+
+while s:
+  cv2.imshow( winName,img )
+  s, img = cam.read()
+
+  ## detect face on image
+  gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+  faces = face_cascade.detectMultiScale(gray, 1.3, 5)
+  for (x,y,w,h) in faces:
+      cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),2)
+      roi_gray = gray[y:y+h, x:x+w]
+      roi_color = img[y:y+h, x:x+w]
+      eyes = eye_cascade.detectMultiScale(roi_gray)
+      for (ex,ey,ew,eh) in eyes:
+          cv2.rectangle(roi_color,(ex,ey),(ex+ew,ey+eh),(0,255,0),2)
+
+  # check for ESC key press, and stop when the user requests it 
+  key = cv2.waitKey(10)
+  if key == 27: 
+    cv2.destroyWindow(winName)
+    break
+
+```
+
+---
+# HOG Descriptor
+## How it Works
+
+```python
+import matplotlib.pyplot as plt
+from skimage.feature import hog
+from skimage import data, color, exposure
+
+image = color.rgb2gray(data.lena())
+
+fd, hog_image = hog(image, orientations=8, pixels_per_cell=(16, 16),
+                    cells_per_block=(1, 1), visualise=True)
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(8, 4))
+
+ax1.axis('off')
+ax1.imshow(image, cmap=plt.cm.gray)
+ax1.set_title('Input image')
+
+# Rescale histogram for better display
+hog_image_rescaled = exposure.rescale_intensity(hog_image, in_range=(0, 0.02))
+ax2.axis('off')
+ax2.imshow(hog_image_rescaled, cmap=plt.cm.gray)
+ax2.set_title('Histogram of Oriented Gradients')
+plt.show()
+```
+---
+class: center, middle
+
+# So you like Scientific Computing. 
+## **What's Next?**
+
+---
+# What's Next
+
+1. Become Better at **NumPy**
+  * NumPy Book: http://csc.ucdavis.edu/~chaos/courses/nlp/Software/NumPyBook.pdf
+  * Excellent Official Docs: http://docs.scipy.org/doc/numpy/index.html
+
+2. Explore **SciPy** with **NumPy**
+  * SciPy Cookbook: http://wiki.scipy.org/Cookbook
+
+3. Learn Machine Learning with **SciKit Learn••
+  * Official Docs: http://scikit-learn.org/stable/documentation.html
+
+4. Check out **OpenCV**
+  * Offical Docs: http://docs.opencv.org/
+  * Checkout the Books: http://amzn.to/1iDG1DQ
+
+
+
+---
 class: center, middle
 # Questions
 ## Don't Be Shy 
